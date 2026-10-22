@@ -43,7 +43,7 @@ spec:
             matchLabels: {app: demo-app}
       containers:
         - name: web
-          image: 522605700177.dkr.ecr.us-east-1.amazonaws.com/aws-demo-app-mostdev:1168c63f91c88c01bdb6643641aad81c8503a4b4
+          image: 522605700177.dkr.ecr.us-east-1.amazonaws.com/aws-demo-app-mostdev:2e21d17c72f1fce0d16cecedf72a33acc4c4abae
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
