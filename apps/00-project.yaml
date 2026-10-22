@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: demo
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  description: "demo-app workloads, least privilege: one repo and one namespace"
+  sourceRepos:
+    - https://github.com/Most-Fullstack/aws-gitops.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: demo
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace

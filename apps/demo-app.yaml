@@ -3,8 +3,10 @@ kind: Application
 metadata:
   name: demo-app
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: demo
   source:
     repoURL: https://github.com/Most-Fullstack/aws-gitops.git
     targetRevision: HEAD
@@ -15,3 +17,10 @@ spec:
   syncPolicy:
     automated: {prune: true, selfHeal: true}
     syncOptions: [CreateNamespace=true]
+    managedNamespaceMetadata:
+      labels:
+        pod-security.kubernetes.io/enforce: restricted
+        pod-security.kubernetes.io/enforce-version: latest
+    retry:
+      limit: 3
+      backoff: {duration: 10s, factor: 2, maxDuration: 3m}
